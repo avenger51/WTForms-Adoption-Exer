@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>WTForms Pet Adoption Exer 1</title>
+</head>
+<body>
+
+  <h1>Edit Pet Here</h1>
+  
+  <ul>
+    <form id="add-pet-form" method="POST">
+        <li>
+            Pet Name: {{ pet.name }}<br>
+            Species: {{ pet.species }}<br>
+
+            <p>
+            {% if pet.photo_url %}
+                <img src="{{ pet.photo_url }}" alt="{{ pet.name }} Photo" width="200">
+              
+            {% else %}
+                No Photo Available<br>
+            {% endif %}
+            </p>
+            Age: {{ pet.age }}<br>
+            Notes: {{ pet.notes }}<br>
+            Available: {{ "Yes" if pet.available else "No" }}<br>
+            <h3>Edit Pet Below</h3>
+  {{ form.hidden_tag() }} <!--add type=hidden form fields -->
+
+  {% for field in form
+         if field.widget.input_type != 'hidden' %}
+
+    <p>
+      {{ field.label }}
+      {{ field }}
+
+    
+      {% endfor %}
+      <button>Save Pet Edit</button>
+    </p>
+
+
+</form>
+    <!-- Removed:
+    <li><a href="/add_pet_form">Add A Pet Here</a></li>
+    <li><a href="/pet_edit">Edit A Pet Here</a></li>
+    -->
+  </ul>
+
+</body>
+</html>
